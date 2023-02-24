@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import signInUser from '../../services/signInUser';
+import signInUser from '../../services/user/signInUser';
 import useAlert from '../common/useAlert';
 
 export default function useSignIn() {
@@ -27,6 +27,7 @@ export default function useSignIn() {
       })
       .finally(() => {
         finishAlert();
+
         setIsLoading(false);
       });
   };
