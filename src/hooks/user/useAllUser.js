@@ -1,18 +1,33 @@
 import { useEffect, useState } from 'react';
-import getAllUsers from '../../services/getAllUsers';
+import getAllUsers from '../../services/user/getAllUsers';
+import useAlert from '../common/useAlert';
 
 export default function useAllUsers() {
+  const { createAlert, finishAlert } = useAlert();
   const [users, setUsers] = useState();
-  const [usersLoading, setUsersLoading] = useState(true);
+  const [fullError, setFullError] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     getAllUsers()
-      .then(({ data }) => {
-        setUsers(data);
+      .then(({ data, error }) => {
+        if (error) {
+          createAlert({
+            show: true,
+            severity: 'error',
+            message: 'Something went wrong...'
+          });
+          return setFullError({ ...error });
+        }
+
+        return setUsers(data);
       })
-      .catch((err) => console.log(err))
-      .finally(() => setUsersLoading(false));
+      .finally(() => {
+        finishAlert();
+        setIsLoading(false);
+      });
   }, []);
 
-  return { users, usersLoading };
+  return { users, isLoading, fullError };
 }
