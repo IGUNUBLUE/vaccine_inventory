@@ -1,6 +1,6 @@
-import PopAlert from '../components/organisms/PopAlert';
-import SignIn from '../components/organisms/SignIn';
-import Store from '../store';
+import PopAlert from '../../components/organisms/PopAlert';
+import SignIn from '../../components/organisms/SignIn';
+import Store from '../../store';
 
 export default function Main() {
   const store = Store((state) => state);
