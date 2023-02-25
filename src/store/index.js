@@ -6,7 +6,7 @@ const persistConfig = {
   version: 'v1'
 };
 
-const Store = create(
+const useAppStore = create(
   persist(
     (set) => ({
       // Alert store
@@ -14,19 +14,10 @@ const Store = create(
       setAlert: (payload) => set(() => ({ alert: payload })),
       // User store
       user: null,
-      setUser: ({
-        session: { accessToken, refreshToken, tokenType },
-        data: { email, id, phone }
-      }) =>
-        set(() => ({
-          user: {
-            session: { accessToken, refreshToken, tokenType },
-            data: { email, id, phone }
-          }
-        }))
+      setUser: (payload) => set(() => ({ user: payload }))
     }),
     persistConfig
   )
 );
 
-export default Store;
+export default useAppStore;
