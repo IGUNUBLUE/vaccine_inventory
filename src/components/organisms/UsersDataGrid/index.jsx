@@ -5,12 +5,12 @@ import columns from './columns';
 import useAllEmployees from '../../../hooks/employee/useAllEmployees';
 import useSetEmployeesState from '../../../hooks/common/useSetEmployeesState';
 import rows from './rows';
-import useSelectedEmployee from '../../../hooks/common/useSelectedEmployee';
+import useSelectedEmployees from '../../../hooks/common/useSelectedEmployees';
 
 export default function UsersDataGrid() {
   const { isLoading } = useAllEmployees();
   const { employees } = useSetEmployeesState();
-  const { selectedEmployee, selectEmployee } = useSelectedEmployee();
+  const { selectedEmployees, selectEmployees } = useSelectedEmployees();
 
   if (!employees?.length)
     return (
@@ -34,8 +34,8 @@ export default function UsersDataGrid() {
       rows={rows(employees)}
       checkboxSelection
       disableSelectionOnClick
-      selectionModel={selectedEmployee}
-      onSelectionModelChange={selectEmployee}
+      selectionModel={selectedEmployees}
+      onSelectionModelChange={selectEmployees}
       loading={isLoading}
     />
   );

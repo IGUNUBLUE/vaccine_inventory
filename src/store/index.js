@@ -16,9 +16,9 @@ const useAppStore = create(
       user: null,
       setUser: (payload) => set(() => ({ user: payload })),
       // Employees store
-      selectedEmployee: [],
-      setSelectedEmployee: (payload) =>
-        set(() => ({ selectedEmployee: payload })),
+      selectedEmployees: [],
+      setSelectedEmployees: (payload) =>
+        set(() => ({ selectedEmployees: payload })),
       employees: null,
       setEmployees: (payload) => set(() => ({ employees: payload }))
     }),
