@@ -1,7 +1,7 @@
-import Store from '../../store';
+import useAppStore from '../../store';
 
 export default function useAlert() {
-  const { alert, setAlert } = Store((state) => state);
+  const { alert, setAlert } = useAppStore((state) => state);
 
   function createAlert({ message, severity, show }) {
     setAlert({
