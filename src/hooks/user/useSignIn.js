@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import { useState } from 'react';
-import config from '../../config';
+import { useState, useEffect } from 'react';
 
+import config from '../../config';
 import signInUser from '../../services/user/signInUser';
 import useAlert from '../common/useAlert';
 import useNavigateTo from '../common/useNavigateTo';
@@ -9,7 +9,7 @@ import useSetUserState from '../common/useSetUserState';
 
 export default function useSignIn() {
   const { createAlert, finishAlert } = useAlert();
-  const { saveUserState } = useSetUserState();
+  const { saveUserState, user: userInStore } = useSetUserState();
   const { navigateTo } = useNavigateTo();
   const [user, setUser] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -29,60 +29,66 @@ export default function useSignIn() {
           return setFullError({ ...error });
         }
 
+        if (!data.length) {
+          createAlert({
+            show: true,
+            severity: 'warning',
+            message: 'Incorrect credentials'
+          });
+
+          return setFullError(error);
+        }
+
         const {
-          session: { access_token, refresh_token, token_type },
-          user: {
-            address,
-            auth_uuid,
-            email: userEmail,
-            first_names,
-            last_names,
-            number_doses,
-            id_number,
-            birthdate,
-            id,
-            phone_number,
-            role_id,
-            type_id,
-            vaccination_date,
-            vaccine_id,
-            vaccine_state
-          }
-        } = data;
+          address,
+          email: userEmail,
+          first_names,
+          last_names,
+          number_doses,
+          id_number,
+          birthdays,
+          id,
+          phone_number,
+          id_type,
+          vaccination_date,
+          vaccine,
+          vaccination_state,
+          created_at,
+          role
+        } = data[0];
 
         saveUserState({
-          session: {
-            accessToken: access_token,
-            refreshToken: refresh_token,
-            tokenType: token_type
-          },
-          data: {
-            id,
-            address,
-            auth: auth_uuid,
-            email: userEmail,
-            firstNames: first_names,
-            lastNames: last_names,
-            numberDoses: number_doses,
-            idNumber: id_number,
-            birthdate,
-            phoneNumber: phone_number,
-            roleId: role_id,
-            typeId: type_id,
-            vaccinationDate: vaccination_date,
-            vaccineId: vaccine_id,
-            vaccineState: vaccine_state
-          }
+          id,
+          address,
+          email: userEmail,
+          firstNames: first_names,
+          lastNames: last_names,
+          numberDoses: number_doses,
+          idNumber: id_number,
+          birthdays,
+          phoneNumber: phone_number,
+          idType: id_type,
+          vaccinationDate: vaccination_date,
+          createdAt: created_at,
+          vaccinationState: vaccination_state,
+          vaccine,
+          role
         });
 
-        return setUser(data);
+        setUser(data);
+        return navigateTo({ path: config.paths.dashboard });
       })
       .finally(() => {
         finishAlert();
-        navigateTo({ path: config.paths.dashboard });
         setIsLoading(false);
       });
   };
+  // if user is logged
+  useEffect(() => {
+    if (userInStore?.id) {
+      navigateTo(config.paths.dashboard);
+    }
+  }, []);
 
   return { user, isLoading, signIn, fullError };
 }

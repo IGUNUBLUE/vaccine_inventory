@@ -14,7 +14,13 @@ const useAppStore = create(
       setAlert: (payload) => set(() => ({ alert: payload })),
       // User store
       user: null,
-      setUser: (payload) => set(() => ({ user: payload }))
+      setUser: (payload) => set(() => ({ user: payload })),
+      // Employees store
+      selectedEmployee: [],
+      setSelectedEmployee: (payload) =>
+        set(() => ({ selectedEmployee: payload })),
+      employees: null,
+      setEmployees: (payload) => set(() => ({ employees: payload }))
     }),
     persistConfig
   )

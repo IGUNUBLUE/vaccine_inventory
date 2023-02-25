@@ -15,7 +15,7 @@ const light = createTheme({
     }
   },
   typography: {
-    fontSize: 14
+    fontSize: 14.5
   }
 });
 

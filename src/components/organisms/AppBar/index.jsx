@@ -1,4 +1,4 @@
-import propTypes from 'prop-types';
+import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
@@ -13,9 +13,11 @@ import SideItems from '../../molecules/SideItems';
 import { AppBarStyled, Drawer } from './styled';
 import useSetUserState from '../../../hooks/common/useSetUserState';
 import UserIconText from '../../molecules/UserIconText';
+import useLogOut from '../../../hooks/user/useLogOut';
 
-export default function AppBar({ children }) {
+export default function AppBar() {
   const { user } = useSetUserState();
+  const { logout } = useLogOut();
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBarStyled position="absolute">
@@ -30,7 +32,7 @@ export default function AppBar({ children }) {
               Dashboard
             </Typography>
           </Stack>
-          <UserIconText user={user} />
+          <UserIconText user={user} logout={logout} />
         </Toolbar>
       </AppBarStyled>
       <Drawer variant="permanent">
@@ -60,11 +62,11 @@ export default function AppBar({ children }) {
         }}
       >
         <Toolbar />
-        <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+        <Container maxWidth="xxl" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={12}>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                {children}
+                <Outlet />
               </Paper>
             </Grid>
           </Grid>
@@ -73,7 +75,3 @@ export default function AppBar({ children }) {
     </Box>
   );
 }
-
-AppBar.propTypes = {
-  children: propTypes.element.isRequired
-};

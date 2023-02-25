@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import getAllUsers from '../../services/user/getAllUsers';
+import getAllEmployees from '../../services/user/getAllEmployees';
 import useAlert from '../common/useAlert';
+import useSetEmployeesState from '../common/useSetEmployeesState';
 
-export default function useAllUsers() {
+export default function useAllEmployees() {
   const { createAlert, finishAlert } = useAlert();
-  const [users, setUsers] = useState();
+  const { saveEmployees } = useSetEmployeesState();
   const [fullError, setFullError] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
-    getAllUsers()
+    getAllEmployees()
       .then(({ data, error }) => {
         if (error) {
           createAlert({
@@ -21,7 +22,16 @@ export default function useAllUsers() {
           return setFullError({ ...error });
         }
 
-        return setUsers(data);
+        if (!data.length) {
+          createAlert({
+            show: true,
+            severity: 'info',
+            message: 'There are not employees...'
+          });
+          return setFullError(error);
+        }
+
+        return saveEmployees(data);
       })
       .finally(() => {
         finishAlert();
@@ -29,5 +39,5 @@ export default function useAllUsers() {
       });
   }, []);
 
-  return { users, isLoading, fullError };
+  return { isLoading, fullError };
 }

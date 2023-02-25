@@ -5,7 +5,9 @@ const config = {
   },
   paths: {
     home: '/',
-    dashboard: '/dashboard'
+    dashboard: '/dashboard',
+    dashboardAdmin: '/dashboard/admin',
+    dashboardUser: '/dashboard/user'
   }
 };
 

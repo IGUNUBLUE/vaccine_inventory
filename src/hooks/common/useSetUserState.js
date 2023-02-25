@@ -4,8 +4,23 @@ export default function useSetUserState() {
   const { user, setUser } = useAppStore((state) => state);
 
   function saveUserState({
-    session: { accessToken, refreshToken, tokenType },
-    data: {
+    email,
+    id,
+    phoneNumber,
+    createdAt,
+    idNumber,
+    firstNames,
+    lastNames,
+    birthdays,
+    address,
+    vaccinationState,
+    vaccinationDate,
+    vaccine,
+    numberDoses,
+    idType,
+    role
+  }) {
+    return setUser({
       email,
       id,
       phoneNumber,
@@ -13,39 +28,20 @@ export default function useSetUserState() {
       idNumber,
       firstNames,
       lastNames,
-      birthdate,
+      birthdays,
       address,
-      vaccineState,
+      vaccinationState,
       vaccinationDate,
+      vaccine,
       numberDoses,
-      vaccineId,
-      roleId,
-      typeId,
-      authUuid
-    }
-  }) {
-    setUser({
-      session: { accessToken, refreshToken, tokenType },
-      data: {
-        email,
-        id,
-        phoneNumber,
-        createdAt,
-        idNumber,
-        firstNames,
-        lastNames,
-        birthdate,
-        address,
-        vaccineState,
-        vaccinationDate,
-        numberDoses,
-        vaccineId,
-        roleId,
-        typeId,
-        authUuid
-      }
+      idType,
+      role
     });
   }
 
-  return { user, saveUserState };
+  function saveUserNull() {
+    setUser(null);
+  }
+
+  return { user, saveUserState, saveUserNull };
 }
