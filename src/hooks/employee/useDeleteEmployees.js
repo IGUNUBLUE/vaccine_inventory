@@ -15,7 +15,7 @@ export default function useDeleteEmployees() {
   function startDeleteEmployees() {
     setIsLoading(true);
     deleteEmployees(selectedEmployees)
-      .then(({ error }) => {
+      .then(({ error, data }) => {
         if (error) {
           createAlert({
             show: true,
@@ -24,6 +24,10 @@ export default function useDeleteEmployees() {
           });
           return setFullError({ ...error });
         }
+
+        return { error, data };
+      })
+      .then(() => {
         // fetch all employees
         getAllEmployees().then(
           ({ data: dataGetAllEmployees, error: errorGetAllEmployees }) => {
@@ -42,7 +46,7 @@ export default function useDeleteEmployees() {
                 severity: 'info',
                 message: 'There are not employees...'
               });
-              return setFullError(error);
+              return setFullError(errorGetAllEmployees);
             }
 
             saveEmployees(dataGetAllEmployees);
@@ -54,7 +58,6 @@ export default function useDeleteEmployees() {
           }
         );
         // end fetch all employees
-        return null;
       })
       .finally(() => {
         finishAlert();
