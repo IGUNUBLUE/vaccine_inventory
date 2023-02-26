@@ -4,7 +4,7 @@ import config from '../config';
 import DashboardAdmin from '../pages/DashboardAdmin';
 import Main from '../pages/Main';
 import Error from '../pages/Error';
-import UsersDataGrid from '../components/organisms/UsersDataGrid';
+import EmployeesDataGrid from '../components/organisms/EmployeesDataGrid';
 import SecureRoute from '../components/organisms/SecureRoute';
 
 export default function routers() {
@@ -24,7 +24,11 @@ export default function routers() {
           children: [
             {
               path: config.paths.dashboardAdmin,
-              element: <UsersDataGrid />
+              element: <EmployeesDataGrid />
+            },
+            {
+              path: config.paths.adminEditEmployees,
+              element: <h1>edit employee</h1>
             }
           ]
         },

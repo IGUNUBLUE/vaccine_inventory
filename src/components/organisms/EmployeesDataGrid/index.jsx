@@ -7,7 +7,7 @@ import useSetEmployeesState from '../../../hooks/common/useSetEmployeesState';
 import rows from './rows';
 import useSelectedEmployees from '../../../hooks/common/useSelectedEmployees';
 
-export default function UsersDataGrid() {
+export default function EmployeesDataGrid() {
   const { isLoading } = useAllEmployees();
   const { employees } = useSetEmployeesState();
   const { selectedEmployees, selectEmployees } = useSelectedEmployees();
@@ -20,7 +20,7 @@ export default function UsersDataGrid() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 7
+          padding: 4
         }}
       >
         <CircularProgress />
