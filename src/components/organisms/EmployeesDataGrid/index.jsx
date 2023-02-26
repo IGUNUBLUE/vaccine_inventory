@@ -29,6 +29,7 @@ export default function EmployeesDataGrid() {
 
   return (
     <DataGrid
+      pageSize={15}
       autoHeight
       columns={columns()}
       rows={rows(employees)}
