@@ -13,6 +13,16 @@ export default function useDeleteEmployees() {
   const [fullError, setFullError] = useState();
 
   function startDeleteEmployees() {
+    if (!selectedEmployees.length) {
+      createAlert({
+        show: true,
+        severity: 'warning',
+        message: 'You must select at least one employee.'
+      });
+
+      return finishAlert();
+    }
+
     setIsLoading(true);
     deleteEmployees(selectedEmployees)
       .then(({ error, data }) => {
@@ -63,6 +73,8 @@ export default function useDeleteEmployees() {
         finishAlert();
         setIsLoading(false);
       });
+
+    return null;
   }
 
   return { startDeleteEmployees, isLoading, fullError };
