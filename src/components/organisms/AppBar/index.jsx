@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import propTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
@@ -15,7 +15,7 @@ import useSetUserState from '../../../hooks/common/useSetUserState';
 import UserIconText from '../../molecules/UserIconText';
 import useLogOut from '../../../hooks/user/useLogOut';
 
-export default function AppBar() {
+export default function AppBar({ children }) {
   const { user } = useSetUserState();
   const { logout } = useLogOut();
   return (
@@ -66,7 +66,7 @@ export default function AppBar() {
           <Grid container spacing={12}>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                <Outlet />
+                {children}
               </Paper>
             </Grid>
           </Grid>
@@ -75,3 +75,7 @@ export default function AppBar() {
     </Box>
   );
 }
+
+AppBar.propTypes = {
+  children: propTypes.element.isRequired
+};
