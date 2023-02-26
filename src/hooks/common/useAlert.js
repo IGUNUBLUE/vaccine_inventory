@@ -22,5 +22,5 @@ export default function useAlert() {
     );
   }
 
-  return { createAlert, finishAlert };
+  return { createAlert, finishAlert, alert };
 }

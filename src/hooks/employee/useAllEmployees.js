@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import getAllEmployees from '../../services/user/getAllEmployees';
+import getAllEmployees from '../../services/employees/getAllEmployees';
 import useAlert from '../common/useAlert';
 import useSetEmployeesState from '../common/useSetEmployeesState';
 

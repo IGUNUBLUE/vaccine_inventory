@@ -7,7 +7,8 @@ const config = {
     home: '/',
     dashboard: '/dashboard',
     dashboardAdmin: '/dashboard/admin',
-    dashboardUser: '/dashboard/user'
+    dashboardUser: '/dashboard/user',
+    adminEditEmployees: '/dashboard/admin/employees/edit'
   }
 };
 
