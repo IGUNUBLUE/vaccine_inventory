@@ -9,10 +9,10 @@ import LoginIcon from '@mui/icons-material/Login';
 import { useForm } from 'react-hook-form';
 
 import useSignIn from '../../../hooks/user/useSignIn';
+import regex from '../../../common/regex';
 
 export default function SignIn() {
   const { isLoading, signIn } = useSignIn();
-
   const {
     register,
     handleSubmit,
@@ -70,7 +70,7 @@ export default function SignIn() {
               {...register('email', {
                 required: 'Email is required',
                 pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  value: regex.email,
                   message: 'Enter a valid email address'
                 }
               })}
@@ -89,8 +89,7 @@ export default function SignIn() {
               {...register('password', {
                 required: 'Password is required',
                 pattern: {
-                  value:
-                    /^(?=.{6,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).*$/,
+                  value: regex.password,
                   message: `Password must include an uppercase, lowercase, symbol, number and be at least 6 characters long.`
                 }
               })}

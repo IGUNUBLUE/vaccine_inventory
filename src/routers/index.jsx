@@ -6,6 +6,8 @@ import Main from '../pages/Main';
 import Error from '../pages/Error';
 import EmployeesDataGrid from '../components/organisms/EmployeesDataGrid';
 import SecureRoute from '../components/organisms/SecureRoute';
+import EditEmployees from '../components/organisms/EditEmployees';
+import AddEmployees from '../components/organisms/AddEmployee';
 
 export default function routers() {
   const appRouters = createBrowserRouter([
@@ -28,7 +30,11 @@ export default function routers() {
             },
             {
               path: config.paths.adminEditEmployees,
-              element: <h1>edit employee</h1>
+              element: <EditEmployees />
+            },
+            {
+              path: config.paths.adminAddEmployees,
+              element: <AddEmployees />
             }
           ]
         },

@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import getAllEmployees from '../../services/employees/getAllEmployees';
 import useAlert from '../common/useAlert';
 import useSetEmployeesState from '../common/useSetEmployeesState';
 
 export default function useAllEmployees() {
+  const executionTimesRef = useRef(false);
   const { createAlert, finishAlert } = useAlert();
-  const { saveEmployees, employees } = useSetEmployeesState();
+  const { saveEmployees } = useSetEmployeesState();
   const [fullError, setFullError] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
 
-    if (!employees?.length) {
+    if (!executionTimesRef.current) {
+      executionTimesRef.current = true;
+
       getAllEmployees()
         .then(({ data, error }) => {
           if (error) {
@@ -36,6 +39,7 @@ export default function useAllEmployees() {
           return saveEmployees(data);
         })
         .finally(() => {
+          executionTimesRef.current = false;
           finishAlert();
         });
     }

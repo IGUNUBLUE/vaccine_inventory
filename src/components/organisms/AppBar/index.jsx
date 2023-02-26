@@ -9,13 +9,12 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 
-import SideItems from '../../molecules/SideItems';
 import { AppBarStyled, Drawer } from './styled';
 import useSetUserState from '../../../hooks/common/useSetUserState';
 import UserIconText from '../../molecules/UserIconText';
 import useLogOut from '../../../hooks/user/useLogOut';
 
-export default function AppBar({ children }) {
+export default function AppBar({ children, Actions }) {
   const { user } = useSetUserState();
   const { logout } = useLogOut();
   return (
@@ -46,7 +45,7 @@ export default function AppBar({ children }) {
         />
         <Divider />
         <List component="nav">
-          <SideItems />
+          <Actions />
         </List>
       </Drawer>
       <Box
@@ -77,5 +76,6 @@ export default function AppBar({ children }) {
 }
 
 AppBar.propTypes = {
-  children: propTypes.element.isRequired
+  children: propTypes.element.isRequired,
+  Actions: propTypes.func.isRequired
 };

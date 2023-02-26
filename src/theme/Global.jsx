@@ -8,7 +8,7 @@ export default function GlobalCss() {
     <GlobalStyles
       styles={() => ({
         '&::-webkit-scrollbar': {
-          width: '10px'
+          width: '9px'
         },
         '&::-webkit-scrollbar-thumb': {
           borderRadius: '10px',

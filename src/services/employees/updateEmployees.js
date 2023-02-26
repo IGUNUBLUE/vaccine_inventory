@@ -1,12 +1,11 @@
 import providers from '../../providers';
 import models from '../../db/models';
-import constants from '../../common/constants';
 
-export default async function getAllEmployees() {
+export default async function updateEmployees(employee) {
   const { data, error } = await providers.supabase
     .from(models.users)
-    .select('*')
-    .eq('role', constants.roles.employee);
+    .update({ ...employee })
+    .eq('id', employee.id);
 
   return { data, error };
 }

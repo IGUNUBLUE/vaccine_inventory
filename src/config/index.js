@@ -8,7 +8,8 @@ const config = {
     dashboard: '/dashboard',
     dashboardAdmin: '/dashboard/admin',
     dashboardUser: '/dashboard/user',
-    adminEditEmployees: '/dashboard/admin/employees/edit'
+    adminEditEmployees: '/dashboard/admin/employees/edit',
+    adminAddEmployees: '/dashboard/admin/employees/add'
   }
 };
 

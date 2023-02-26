@@ -1,12 +1,11 @@
 const constants = {
   roles: {
     admin: 'administrator',
-    user: 'employee'
+    employee: 'employee'
   },
   vaccines: ['Sputnik', 'AstraZeneca', 'Pfizer', 'Jhonson&Jhonson'],
-  idType: {
-    'C.C': 'cédula'
-  }
+  vaccinationState: ['No Vacunado', 'Vacunado'],
+  idType: ['cédula']
 };
 
 export default constants;

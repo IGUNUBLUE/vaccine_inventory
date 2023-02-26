@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 import columns from './columns';
@@ -20,10 +20,14 @@ export default function EmployeesDataGrid() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 4
+          padding: 1
         }}
       >
-        <CircularProgress />
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <Typography variant="h4"> No employees registered</Typography>
+        )}
       </Box>
     );
 
