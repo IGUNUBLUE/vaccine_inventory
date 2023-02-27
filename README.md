@@ -12,11 +12,9 @@
 ### Configuración
 
 - variables de entorno:
+  - los valores actuales disponibles en el .env son validos para pruebas.
 
-⚠️PD: los valores para pruebas serán incluidos en el correo.
-
-crear un copia del archivo .env.example y agregar los valores requeridos (en el
-correo enviado)
+⚠️he dejado intencionalmente el .env visible.
 
 ```js
 VITE_SUPABASE_PROJECT_URL=
